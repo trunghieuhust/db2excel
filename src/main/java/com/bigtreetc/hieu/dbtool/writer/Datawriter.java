@@ -1,11 +1,10 @@
 package com.bigtreetc.hieu.dbtool.writer;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface Datawriter {
-	int writeHeader(String[] headers);
-	
-	int writeRowValues(Object[] values);
-	
-	void close() throws IOException;
+	public boolean writeSheet(String sheetname, String[] headers, List<Object[]> rowValues);
+
+	void writeToFile() throws IOException;
 }
