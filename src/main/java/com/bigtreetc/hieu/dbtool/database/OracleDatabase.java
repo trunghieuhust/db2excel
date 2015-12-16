@@ -8,6 +8,7 @@ public class OracleDatabase implements IDatabase {
 	private static String URL = "127.0.0.1";
 	private static String username = "";
 	private static String password = "";
+	private static OracleDatabase instance;
 
 	private static Connection connection = null;
 
@@ -24,13 +25,14 @@ public class OracleDatabase implements IDatabase {
 			}
 
 			try {
-				connection = DriverManager.getConnection("jdbc:oracle:thin:@" + URL + ":1521:XE", OracleDatabase.username, OracleDatabase.password);
+				connection = DriverManager.getConnection("jdbc:oracle:thin:@" + URL + ":1521:XE",
+						OracleDatabase.username, OracleDatabase.password);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
+	
 	public Connection getConnection() {
 		return connection;
 	}
@@ -43,4 +45,37 @@ public class OracleDatabase implements IDatabase {
 		}
 	}
 
+	public static OracleDatabase getInstance() {
+		synchronized (OracleDatabase.class) {
+			if (instance != null) {
+				return instance;
+			} else {
+				return new OracleDatabase();
+			}
+		}
+	}
+
+	public static String getURL() {
+		return URL;
+	}
+
+	public static void setURL(String uRL) {
+		URL = uRL;
+	}
+
+	public static String getUsername() {
+		return username;
+	}
+
+	public static void setUsername(String username) {
+		OracleDatabase.username = username;
+	}
+
+	public static String getPassword() {
+		return password;
+	}
+
+	public static void setPassword(String password) {
+		OracleDatabase.password = password;
+	}
 }

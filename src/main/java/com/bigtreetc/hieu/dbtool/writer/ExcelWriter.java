@@ -23,6 +23,7 @@ public class ExcelWriter implements Datawriter {
 
 	public boolean writeSheet(String sheetname, String[] headers, List<Object[]> rowValues) {
 		Sheet sheet = workbook.createSheet(sheetname);
+		currentRow = 0;
 		writeRow(sheet, headers);
 		for (Object[] rowValue : rowValues) {
 			writeRow(sheet, rowValue);
